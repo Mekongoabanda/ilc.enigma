@@ -38,4 +38,18 @@ public class MachineTest {
 		assertEquals(expected, actual);
 	}
 
+	@Test
+	//Convertion de la 1ere lettre du message 1
+	public void convertChar1_msg1() {
+
+
+		char c = 'F';
+		Machine m = new Machine();
+		Main.configure(m, config);
+		char expected = 'H';
+		char actuel = m.convertChar(c);
+		assertEquals(expected, actuel);
+
+	}
+
 }

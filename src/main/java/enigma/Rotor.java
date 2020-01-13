@@ -2,6 +2,7 @@ package enigma;
 
 public class Rotor {
 
+    private static final int myConst = 26;
     private int position;
     private int[] cipher = new int[26];
     private int[] bcipher = new int[26];
@@ -18,8 +19,8 @@ public class Rotor {
     
 	public static Rotor rotorFactory(String str, String notches){
 		char[] s = str.trim().replace(" ", "").toCharArray();
-		int[] cipher = new int[26];
-		for (int i = 0; i< 26; i++){
+		int[] cipher = new int[myConst];
+		for (int i = 0; i< myConst; i++){
 			cipher[i] = toIndex(s[i]);
 		}
 		s = notches.trim().replace(" and ", "").toCharArray();
@@ -45,21 +46,23 @@ public class Rotor {
 	}
 
     public int convertForward(int p) {
-        return ((cipher[((p+position)%26+26)%26]-position)%26+26)%26;
+        return ((cipher[((p+position)%myConst+myConst)%myConst]-position)%myConst+myConst)%myConst;
     }
 
     public int convertBackward(int e) {
-        return ((bcipher[((e+position)%26+26)%26]-position)%26+26)%26;
+        return ((bcipher[((e+position)%myConst+myConst)%myConst]-position)%myConst+myConst)%myConst;
     }
-    
-    public void advance() {
-        position = (position+1) % 26;
+
+    //C'est la machine qui fait bouger les cylindres, donc pas en publique
+    void advance() {
+        position = (position+1) % myConst;
     }
     
     protected boolean atNotch() {
         return (position == notch1 || position == notch2);
     }
 
+    //
     protected static char toLetter(int p) {
         return (char)(p + 'A');
     }
@@ -69,7 +72,7 @@ public class Rotor {
     }
     
 	private void createBCipher() {
-		for(int i =0; i<26; i++)
+		for(int i =0; i<myConst; i++)
 			bcipher[cipher[i]] = i;
 	}
 

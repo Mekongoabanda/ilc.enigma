@@ -7,6 +7,7 @@ public class Machine {
 	private Rotor rightRotor;
 	private Reflector reflector;
 
+	//Initialisation du Rotor
 	public void initRotors(Reflector reflector, Rotor left, Rotor middle, Rotor right) {
 		this.reflector = reflector;
 		leftRotor = left;
@@ -14,7 +15,8 @@ public class Machine {
 		rightRotor = right;
 	}
 
-	public void setPositions(String setting) {
+	//Fait penser que c'est un setter, ce qui peut prêter à confusion dans la compréhension du code
+	public void setSettings(String setting) {
 		char[] charSettings = setting.toCharArray();
 		reflector.setPosition(Rotor.toIndex(charSettings[0]));
 		leftRotor.setPosition(Rotor.toIndex(charSettings[1]));
@@ -24,7 +26,7 @@ public class Machine {
 	
 	public void configure(Reflector reflector, Rotor left, Rotor middle, Rotor right, String setting) {
 		this.initRotors(reflector, left, middle, right);
-		this.setPositions(setting);
+		this.setSettings(setting);
 
 	}
 
@@ -53,6 +55,32 @@ public class Machine {
 
 	}
 
+	//Nécessite une optimisation
+	/*void advanceRotors() {
+		boolean advanceLeft = false;
+		boolean advanceMiddle = false;
+		boolean advanceRight = true;
+		if (leftRotor.atNotch()) {
+		}
+		if (middleRotor.atNotch()) {
+			advanceMiddle = true;
+			advanceLeft = true;
+		}
+		if (rightRotor.atNotch()) {
+			advanceMiddle = true;
+			advanceRight = true;
+		}
+		if (advanceLeft) {
+			leftRotor.advance();
+		}
+		if (advanceRight) {
+			rightRotor.advance();
+		}
+		if (advanceMiddle) {
+			middleRotor.advance();
+		}
+	}*/
+
 	void advanceRotors() {
 		boolean advanceLeft = false;
 		boolean advanceMiddle = false;
@@ -77,4 +105,5 @@ public class Machine {
 			middleRotor.advance();
 		}
 	}
+
 }

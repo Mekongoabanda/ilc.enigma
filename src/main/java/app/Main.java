@@ -45,6 +45,7 @@ public final class Main {
 
 		try {
 			while (true) {
+				System.out.print("Veuillez entrer le mot : ");
 				String line = input.readLine();
 				if (line == null) {
 					break;
@@ -89,7 +90,7 @@ public final class Main {
 		return true;
 	}
 
-	static boolean isUpperLetter(char c) {
+	public static boolean isUpperLetter(char c) {
 		if (((int) c > 90) || ((int) c < 65)) {
 			return false;
 		}

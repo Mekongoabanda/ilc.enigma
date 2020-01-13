@@ -4,13 +4,15 @@ package enigma;
  *  @author
  */
 public class Reflector extends Rotor {
+
+	private static final int mConstante = 26;
 	
 	int[] reflection;
 	
 	public static Reflector reflectorFactory(String str){
 		char[] s = str.trim().replace(" ", "").toCharArray();
-		int[] cipher = new int[26];
-		for (int i = 0; i< 26; i++){
+		int[] cipher = new int[mConstante];
+		for (int i = 0; i< mConstante; i++){
 			cipher[i] = toIndex(s[i]);
 		}
 		return new Reflector(cipher);
@@ -22,7 +24,7 @@ public class Reflector extends Rotor {
 	}
         
     public int convertForward(int p) {
-        return ((reflection[((p)%26+26)%26])%26+26)%26;
+        return ((reflection[((p)%mConstante+mConstante)%mConstante])%mConstante+mConstante)%mConstante;
     }
 
     @Override
